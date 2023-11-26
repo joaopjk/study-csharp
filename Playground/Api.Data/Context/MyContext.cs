@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Api.Domain.Entities;
+using Api.Data.Mapping;
 
 namespace Api.Data.Context
 {
@@ -11,6 +12,8 @@ namespace Api.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<UserEntity>(new UserMap().Configure);
         }
     }
 }
