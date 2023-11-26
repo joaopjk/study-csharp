@@ -18,9 +18,23 @@ namespace Api.Data.Repositories
             _dbSet = _context.Set<T>();
         }
 
-        public Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _dbSet.SingleOrDefaultAsync(_ => _.Id == id);
+                if (result == null)
+                    return false;
+
+                _dbSet.Remove(result);
+                await _context.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public async Task<T> InsertAsync(T entity)
@@ -43,21 +57,40 @@ namespace Api.Data.Repositories
             return entity;
         }
 
-        public Task<T> SelectAsync(Guid id)
+        public async Task<bool> ExistAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _dbSet.AnyAsync(_ => _.Id.Equals(id));
         }
 
-        public Task<IEnumerable<T>> SelectAsync()
+        public async Task<T> SelectAsync(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await _dbSet.SingleOrDefaultAsync(_ => _.Id == id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<IEnumerable<T>> SelectAsync()
+        {
+            try
+            {
+                return await _dbSet.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public async Task<T> UpdateAsync(T entity)
         {
             try
             {
-                var result = await _dbSet.SingleOrDefaultAsync( _ => _.Id == entity.Id );
+                var result = await _dbSet.SingleOrDefaultAsync(_ => _.Id == entity.Id);
                 if (result == null)
                     return null;
 
