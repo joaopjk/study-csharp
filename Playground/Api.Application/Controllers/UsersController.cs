@@ -1,5 +1,4 @@
 ﻿using Api.Domain.Interfaces.Services.User;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
@@ -20,6 +19,23 @@ namespace Api.Application.Controllers
             try
             {
                 return Ok(await service.GetAll());
+            }
+            catch (ArgumentException ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("{id}", Name = "GetWithId")]
+        public async Task<ActionResult> Get([FromServices] IUserService service, Guid id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                return Ok(await service.Get(id));
             }
             catch (ArgumentException ex)
             {
