@@ -1,4 +1,5 @@
-﻿using Api.Domain.Interfaces.Services.User;
+﻿using Api.Domain.Entities;
+using Api.Domain.Interfaces.Services.User;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
@@ -36,6 +37,26 @@ namespace Api.Application.Controllers
             try
             {
                 return Ok(await service.Get(id));
+            }
+            catch (ArgumentException ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Post([FromServices] IUserService service, [FromBody] UserEntity entity)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                var result = await service.Post(entity);
+                if (result != null)
+                    return Created(new Uri(Url.Link("GetWithId", new { id = result.Id })), result);
+                return BadRequest();
+
             }
             catch (ArgumentException ex)
             {
