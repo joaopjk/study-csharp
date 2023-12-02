@@ -21,14 +21,14 @@ namespace Api.Application.Controllers
             {
                 return Ok(await service.GetAll());
             }
-            catch (ArgumentException ex)
+            catch (Exception ex)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
             }
         }
 
         [HttpGet]
-        [Route("{id}", Name = "GetWithId")]
+        [Route("{id:guid}", Name = "GetWithId")]
         public async Task<ActionResult> Get([FromServices] IUserService service, Guid id)
         {
             if (!ModelState.IsValid)
@@ -38,7 +38,7 @@ namespace Api.Application.Controllers
             {
                 return Ok(await service.Get(id));
             }
-            catch (ArgumentException ex)
+            catch (Exception ex)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
             }
@@ -58,7 +58,42 @@ namespace Api.Application.Controllers
                 return BadRequest();
 
             }
-            catch (ArgumentException ex)
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> Put([FromServices] IUserService service, [FromBody] UserEntity entity)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                var result = await service.Put(entity);
+                if (result != null)
+                    return Ok(result);
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpDelete("{id:guid}")]
+        public async Task<ActionResult> Delete([FromServices] IUserService service, Guid id)
+        {
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                return Ok(await service.Delete(id));
+            }
+            catch (Exception ex)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
             }
