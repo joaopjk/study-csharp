@@ -11,7 +11,7 @@ namespace Api.Data.Repositories
     public class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
         private readonly MyContext _context;
-        private DbSet<T> _dbSet;
+        private readonly DbSet<T> _dbSet;
         public BaseRepository(MyContext context)
         {
             _context = context;
@@ -22,7 +22,7 @@ namespace Api.Data.Repositories
         {
             try
             {
-                var result = await _dbSet.SingleOrDefaultAsync(_ => _.Id == id);
+                var result = await _dbSet.SingleOrDefaultAsync(e => e.Id == id);
                 if (result == null)
                     return false;
 
@@ -33,7 +33,7 @@ namespace Api.Data.Repositories
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -51,7 +51,7 @@ namespace Api.Data.Repositories
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
 
             return entity;
@@ -59,18 +59,18 @@ namespace Api.Data.Repositories
 
         public async Task<bool> ExistAsync(Guid id)
         {
-            return await _dbSet.AnyAsync(_ => _.Id.Equals(id));
+            return await _dbSet.AnyAsync(e => e.Id.Equals(id));
         }
 
         public async Task<T> SelectAsync(Guid id)
         {
             try
             {
-                return await _dbSet.SingleOrDefaultAsync(_ => _.Id == id);
+                return await _dbSet.SingleOrDefaultAsync(e => e.Id == id);
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -82,7 +82,7 @@ namespace Api.Data.Repositories
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -90,7 +90,7 @@ namespace Api.Data.Repositories
         {
             try
             {
-                var result = await _dbSet.SingleOrDefaultAsync(_ => _.Id == entity.Id);
+                var result = await _dbSet.SingleOrDefaultAsync(b => b.Id == entity.Id);
                 if (result == null)
                     return null;
 
@@ -102,7 +102,7 @@ namespace Api.Data.Repositories
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
 
             return entity;

@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Api.Data.Mapping;
 using Api.Domain.Entities;
-using Api.Data.Mapping;
+using Microsoft.EntityFrameworkCore;
 
 namespace Api.Data.Context
 {

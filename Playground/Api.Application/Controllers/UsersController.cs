@@ -86,7 +86,7 @@ namespace Api.Application.Controllers
         [HttpDelete("{id:guid}")]
         public async Task<ActionResult> Delete([FromServices] IUserService service, Guid id)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
