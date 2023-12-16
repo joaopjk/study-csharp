@@ -12,6 +12,8 @@ namespace Api.Domain.Security
         {
             using var provider = new RSACryptoServiceProvider(2048);
             SecurityKey = new RsaSecurityKey(provider.ExportParameters(true));
+
+            SigningCredentials = new SigningCredentials(SecurityKey, SecurityAlgorithms.RsaSha256Signature);
         }
     }
 }
