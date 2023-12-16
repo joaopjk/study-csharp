@@ -1,4 +1,5 @@
 using Api.CrossCutting.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +25,9 @@ namespace Api.Application
             ConfigureRepository.ConfigureDependenciesRepository(services);
 
             services.AddControllers();
+
+           
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo()

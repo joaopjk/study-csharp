@@ -1,5 +1,6 @@
 ﻿using Api.Domain.Entities;
 using Api.Domain.Interfaces.Services.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
@@ -11,6 +12,7 @@ namespace Api.Application.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        [Authorize("Bearer")]
         [HttpGet]
         public async Task<ActionResult> GetAll([FromServices] IUserService service)
         {
@@ -27,6 +29,7 @@ namespace Api.Application.Controllers
             }
         }
 
+        [Authorize("Bearer")]
         [HttpGet]
         [Route("{id:guid}", Name = "GetWithId")]
         public async Task<ActionResult> Get([FromServices] IUserService service, Guid id)
@@ -44,6 +47,7 @@ namespace Api.Application.Controllers
             }
         }
 
+        [Authorize("Bearer")]
         [HttpPost]
         public async Task<ActionResult> Post([FromServices] IUserService service, [FromBody] UserEntity entity)
         {
@@ -64,6 +68,7 @@ namespace Api.Application.Controllers
             }
         }
 
+        [Authorize("Bearer")]
         [HttpPut]
         public async Task<ActionResult> Put([FromServices] IUserService service, [FromBody] UserEntity entity)
         {
@@ -83,6 +88,7 @@ namespace Api.Application.Controllers
             }
         }
 
+        [Authorize("Bearer")]
         [HttpDelete("{id:guid}")]
         public async Task<ActionResult> Delete([FromServices] IUserService service, Guid id)
         {
@@ -101,7 +107,7 @@ namespace Api.Application.Controllers
 
         private ObjectResult HandleError(Exception ex)
         {
-            return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+            return StatusCode((int)HttpStatusCode.InternalServerError, ex.InnerException.Message ?? ex.Message);
         }
     }
 }
