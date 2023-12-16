@@ -6,7 +6,7 @@ using Api.Domain.Repositories;
 
 namespace Api.Service.Services
 {
-    internal class LoginService : ILoginService
+    public class LoginService : ILoginService
     {
         private readonly IUserRepository _repository;
 

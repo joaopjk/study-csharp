@@ -23,7 +23,7 @@ namespace Api.Application.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+                return HandleError(ex);
             }
         }
 
@@ -40,7 +40,7 @@ namespace Api.Application.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+                return HandleError(ex);
             }
         }
 
@@ -60,7 +60,7 @@ namespace Api.Application.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+                return HandleError(ex);
             }
         }
 
@@ -79,7 +79,7 @@ namespace Api.Application.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+                return HandleError(ex);
             }
         }
 
@@ -95,8 +95,13 @@ namespace Api.Application.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+                return HandleError(ex);
             }
+        }
+
+        private ObjectResult HandleError(Exception ex)
+        {
+            return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
         }
     }
 }
