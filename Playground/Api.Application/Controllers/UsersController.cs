@@ -50,14 +50,14 @@ namespace Api.Application.Controllers
 
         [Authorize("Bearer")]
         [HttpPost]
-        public async Task<ActionResult> Post([FromServices] IUserService service, [FromBody] UserDto userDto)
+        public async Task<ActionResult> Post([FromServices] IUserService service, [FromBody] UserDtoCreate userDtoCreate)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                var result = await service.Post(userDto);
+                var result = await service.Post(userDtoCreate);
                 if (result != null)
                     return Created(new Uri(Url.Link("GetWithId", new { id = result.Id })), result);
                 return BadRequest();
@@ -71,14 +71,14 @@ namespace Api.Application.Controllers
 
         [Authorize("Bearer")]
         [HttpPut]
-        public async Task<ActionResult> Put([FromServices] IUserService service, [FromBody] UserDto userDto)
+        public async Task<ActionResult> Put([FromServices] IUserService service, [FromBody] UserDtoUpdate userDtoUpdate)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                var result = await service.Put(userDto);
+                var result = await service.Put(userDtoUpdate);
                 if (result != null)
                     return Ok(result);
                 return BadRequest();
