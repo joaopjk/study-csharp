@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using Api.Domain.Dtos.User;
 
 namespace Api.Application.Controllers
 {
@@ -49,14 +50,14 @@ namespace Api.Application.Controllers
 
         [Authorize("Bearer")]
         [HttpPost]
-        public async Task<ActionResult> Post([FromServices] IUserService service, [FromBody] UserEntity entity)
+        public async Task<ActionResult> Post([FromServices] IUserService service, [FromBody] UserDto userDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                var result = await service.Post(entity);
+                var result = await service.Post(userDto);
                 if (result != null)
                     return Created(new Uri(Url.Link("GetWithId", new { id = result.Id })), result);
                 return BadRequest();
@@ -70,14 +71,14 @@ namespace Api.Application.Controllers
 
         [Authorize("Bearer")]
         [HttpPut]
-        public async Task<ActionResult> Put([FromServices] IUserService service, [FromBody] UserEntity entity)
+        public async Task<ActionResult> Put([FromServices] IUserService service, [FromBody] UserDto userDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                var result = await service.Put(entity);
+                var result = await service.Put(userDto);
                 if (result != null)
                     return Ok(result);
                 return BadRequest();

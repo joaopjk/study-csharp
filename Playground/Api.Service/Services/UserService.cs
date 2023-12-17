@@ -4,15 +4,19 @@ using Api.Domain.Interfaces.Services.User;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Api.Domain.Dtos.User;
+using AutoMapper;
 
 namespace Api.Service.Services
 {
     public class UserService : IUserService
     {
+        private readonly IMapper _mapper;
         private readonly IRepository<UserEntity> _userRepository;
 
-        public UserService(IRepository<UserEntity> userRepository)
+        public UserService(IMapper mapper, IRepository<UserEntity> userRepository)
         {
+            _mapper = mapper;
             _userRepository = userRepository;
         }
 
@@ -21,24 +25,26 @@ namespace Api.Service.Services
             return await _userRepository.DeleteAsync(id);
         }
 
-        public async Task<UserEntity> Get(Guid id)
+        public async Task<UserDto> Get(Guid id)
         {
-            return await _userRepository.SelectAsync(id);
+            return _mapper.Map<UserDto>(await _userRepository.SelectAsync(id));
         }
 
-        public async Task<IEnumerable<UserEntity>> GetAll()
+        public async Task<IEnumerable<UserDto>> GetAll()
         {
-            return await _userRepository.SelectAsync();
+            return _mapper.Map<IEnumerable<UserDto>>(await _userRepository.SelectAsync());
         }
 
-        public async Task<UserEntity> Post(UserEntity entity)
+        public async Task<UserDtoCreateResult> Post(UserDto userDto)
         {
-            return await _userRepository.InsertAsync(entity);
+            return _mapper.Map<UserDtoCreateResult>(
+                await _userRepository.InsertAsync(_mapper.Map<UserEntity>(userDto)));
         }
 
-        public async Task<UserEntity> Put(UserEntity entity)
+        public async Task<UserDtoUpdateResult> Put(UserDto userDto)
         {
-            return await _userRepository.UpdateAsync(entity);
+            return _mapper.Map<UserDtoUpdateResult>(
+                await _userRepository.UpdateAsync(_mapper.Map<UserEntity>(userDto)));
         }
     }
 }
