@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Api.Domain.Dtos.Municipio;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Api.Domain.Dtos.Municipio;
 
 namespace Api.Domain.Interfaces.Services.Municipio
 {
@@ -12,7 +12,7 @@ namespace Api.Domain.Interfaces.Services.Municipio
         Task<MunicipioDtoCompleto> GetCompleteByIbge(int codIbge);
         Task<IEnumerable<MunicipioDto>> GetAll();
         Task<MunicipioDtoCreateResult> Post(MunicipioDtoCreate municipio);
-        Task<MunicipioDtoUpdateResult> Put(MunicipioDtoUpdate  municipio);
+        Task<MunicipioDtoUpdateResult> Put(MunicipioDtoUpdate municipio);
         Task<bool> Delete(Guid id);
     }
 }

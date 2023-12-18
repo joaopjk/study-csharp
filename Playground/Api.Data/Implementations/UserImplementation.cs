@@ -1,13 +1,13 @@
-﻿using System.Threading.Tasks;
-using Api.Data.Context;
+﻿using Api.Data.Context;
 using Api.Data.Repositories;
 using Api.Domain.Entities;
 using Api.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Api.Data.Implementations
 {
-    public class UserImplementation: BaseRepository<UserEntity>, IUserRepository
+    public class UserImplementation : BaseRepository<UserEntity>, IUserRepository
     {
         private readonly DbSet<UserEntity> _dbSet;
 

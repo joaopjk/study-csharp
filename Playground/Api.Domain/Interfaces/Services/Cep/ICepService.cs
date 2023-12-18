@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Api.Domain.Dtos.Cep;
+using System;
 using System.Threading.Tasks;
-using Api.Domain.Dtos.Cep;
 
 namespace Api.Domain.Interfaces.Services.Cep
 {

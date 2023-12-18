@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Api.Domain.Dtos.Municipio;
+﻿using Api.Domain.Dtos.Municipio;
 using Api.Domain.Entities;
 using Api.Domain.Interfaces.Services.Municipio;
 using Api.Domain.Repositories;
 using AutoMapper;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Api.Service.Services
 {

@@ -1,5 +1,5 @@
-﻿using System;
-using Api.Domain.Dtos.UF;
+﻿using Api.Domain.Dtos.UF;
+using System;
 
 namespace Api.Domain.Dtos.Municipio
 {

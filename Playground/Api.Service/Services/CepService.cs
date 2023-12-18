@@ -1,10 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-using Api.Domain.Dtos.Cep;
+﻿using Api.Domain.Dtos.Cep;
 using Api.Domain.Entities;
 using Api.Domain.Interfaces.Services.Cep;
 using Api.Domain.Repositories;
 using AutoMapper;
+using System;
+using System.Threading.Tasks;
 
 namespace Api.Service.Services
 {

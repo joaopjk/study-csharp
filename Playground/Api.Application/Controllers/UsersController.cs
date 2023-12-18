@@ -1,11 +1,10 @@
-﻿using Api.Domain.Entities;
+﻿using Api.Domain.Dtos.User;
 using Api.Domain.Interfaces.Services.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
 using System.Threading.Tasks;
-using Api.Domain.Dtos.User;
 
 namespace Api.Application.Controllers
 {

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Net;
-using System.Threading.Tasks;
-using Api.Domain.Interfaces.Services.Uf;
+﻿using Api.Domain.Interfaces.Services.Uf;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace Api.Application.Controllers
 {
@@ -22,7 +22,7 @@ namespace Api.Application.Controllers
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
@@ -34,7 +34,7 @@ namespace Api.Application.Controllers
                 return HandleError(e);
             }
         }
-        
+
         [AllowAnonymous]
         [HttpGet("{id:guid}")]
         public async Task<ActionResult> Get(Guid id)

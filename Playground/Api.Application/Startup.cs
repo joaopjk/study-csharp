@@ -1,4 +1,6 @@
 using Api.CrossCutting.DependencyInjection;
+using Api.CrossCutting.Mappings;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -7,8 +9,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
-using Api.CrossCutting.Mappings;
-using AutoMapper;
 
 namespace Api.Application
 {
@@ -35,7 +35,7 @@ namespace Api.Application
             var mapper = config.CreateMapper();
             services.AddSingleton(mapper);
 
-            services.AddControllers();   
+            services.AddControllers();
 
             services.AddSwaggerGen(c =>
             {

@@ -4,7 +4,7 @@ namespace Api.Domain.Dtos.User
 {
     public class UserDtoCreate
     {
-        [Required(ErrorMessage ="O campo nome é obrigatório!")]
+        [Required(ErrorMessage = "O campo nome é obrigatório!")]
         [StringLength(60, ErrorMessage = "Nome deve ter no máximo {1} caracteres.")]
         public string Name { get; set; }
         [Required(ErrorMessage = "O campo email é obrigátorio!")]

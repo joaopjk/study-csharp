@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Api.Domain.Models
+﻿namespace Api.Domain.Models
 {
     public class UserModel : BaseModel
     {

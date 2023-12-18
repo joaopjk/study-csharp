@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Api.Domain.Dtos.UF;
+﻿using Api.Domain.Dtos.UF;
 using Api.Domain.Interfaces.Services.Uf;
 using Api.Domain.Repositories;
 using AutoMapper;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Api.Service.Services
 {

@@ -1,5 +1,5 @@
-﻿using System;
-using Api.Domain.Dtos.Municipio;
+﻿using Api.Domain.Dtos.Municipio;
+using System;
 
 namespace Api.Domain.Dtos.Cep
 {

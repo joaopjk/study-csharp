@@ -1,13 +1,13 @@
-﻿using Api.Domain.Interfaces.Services.User;
-using System.Threading.Tasks;
+﻿using Api.Domain.Dtos;
+using Api.Domain.Interfaces.Services.User;
 using Api.Domain.Repositories;
-using Api.Domain.Dtos;
 using Api.Domain.Security;
-using System.Security.Claims;
-using System.Security.Principal;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
-using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using System.Security.Principal;
+using System.Threading.Tasks;
 
 namespace Api.Service.Services
 {

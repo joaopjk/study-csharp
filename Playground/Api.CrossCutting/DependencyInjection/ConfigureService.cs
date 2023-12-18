@@ -1,13 +1,13 @@
-﻿using Api.Domain.Interfaces.Services.User;
+﻿using Api.Domain.Interfaces.Services.Cep;
+using Api.Domain.Interfaces.Services.Municipio;
+using Api.Domain.Interfaces.Services.Uf;
+using Api.Domain.Interfaces.Services.User;
 using Api.Domain.Security;
 using Api.Service.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using Api.Domain.Interfaces.Services.Cep;
-using Api.Domain.Interfaces.Services.Municipio;
-using Api.Domain.Interfaces.Services.Uf;
 
 namespace Api.CrossCutting.DependencyInjection
 {
@@ -36,7 +36,7 @@ namespace Api.CrossCutting.DependencyInjection
                     new AuthorizationPolicyBuilder()
                         .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
                         .RequireAuthenticatedUser().Build());
-                                                    
+
             });
 
             serviceCollection.AddTransient<IUserService, UserService>();

@@ -1,11 +1,11 @@
 ﻿using Api.Data.Context;
+using Api.Data.Implementations;
 using Api.Data.Repositories;
 using Api.Domain.Interfaces;
+using Api.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using Api.Data.Implementations;
-using Api.Domain.Repositories;
 
 namespace Api.CrossCutting.DependencyInjection
 {

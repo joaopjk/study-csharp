@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Api.Domain.Entities
 {
-    public class CepEntity: BaseEntity
+    public class CepEntity : BaseEntity
     {
         [Required]
         [MaxLength(10)]

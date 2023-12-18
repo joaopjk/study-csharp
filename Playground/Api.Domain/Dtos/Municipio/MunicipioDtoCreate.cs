@@ -9,7 +9,7 @@ namespace Api.Domain.Dtos.Municipio
         [MaxLength(60, ErrorMessage = "Nome do município deve ter no máximo {1} caracteres!")]
         public string Nome { get; set; }
 
-        [Range(0,int.MaxValue, ErrorMessage = "Código do IBGE inválido!")]
+        [Range(0, int.MaxValue, ErrorMessage = "Código do IBGE inválido!")]
         public int CodIbge { get; set; }
 
         [Required(ErrorMessage = "Código de UF é campo obrigatório!")]
