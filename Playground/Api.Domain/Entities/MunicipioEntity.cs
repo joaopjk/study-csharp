@@ -13,7 +13,7 @@ namespace Api.Domain.Entities
         public int CodIbge { get; set; }
 
         [Required]
-        public Guid EfId { get; set; }
+        public Guid UfId { get; set; }
         public UfEntity Uf { get; set; }
         public IEnumerable<CepEntity> Ceps { get; set; }
     }

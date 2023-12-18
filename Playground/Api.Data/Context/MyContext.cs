@@ -8,6 +8,10 @@ namespace Api.Data.Context
     public class MyContext : DbContext
     {
         public DbSet<UserEntity> Users { get; set; }
+        public DbSet<UfEntity> Ufs { get; set; }
+        public DbSet<MunicipioEntity> Municipios { get; set; }
+        public DbSet<CepEntity> Ceps { get; set; }
+
         public MyContext(DbContextOptions<MyContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
