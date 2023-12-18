@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using Api.Domain.Interfaces.Services.Cep;
+using Api.Domain.Interfaces.Services.Municipio;
+using Api.Domain.Interfaces.Services.Uf;
 
 namespace Api.CrossCutting.DependencyInjection
 {
@@ -38,6 +41,9 @@ namespace Api.CrossCutting.DependencyInjection
 
             serviceCollection.AddTransient<IUserService, UserService>();
             serviceCollection.AddTransient<ILoginService, LoginService>();
+            serviceCollection.AddTransient<IUfService, UfService>();
+            serviceCollection.AddTransient<IMunicipioService, MunicipioService>();
+            serviceCollection.AddTransient<ICepService, CepService>();
         }
     }
 }

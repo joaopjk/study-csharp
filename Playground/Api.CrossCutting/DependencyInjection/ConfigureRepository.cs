@@ -20,7 +20,6 @@ namespace Api.CrossCutting.DependencyInjection
             );
             serviceCollection.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
             serviceCollection.AddTransient<IUserRepository, UserImplementation>();
-            serviceCollection.AddTransient<ILoginService, LoginService>();
         }
     }
 }
