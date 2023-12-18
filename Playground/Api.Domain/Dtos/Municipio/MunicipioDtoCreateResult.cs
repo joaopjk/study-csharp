@@ -2,7 +2,7 @@
 
 namespace Api.Domain.Dtos.Municipio
 {
-    internal class MunicipioDtoCreateResult
+    public class MunicipioDtoCreateResult
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }
