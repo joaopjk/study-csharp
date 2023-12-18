@@ -5,9 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using Api.Data.Implementations;
-using Api.Domain.Interfaces.Services.User;
 using Api.Domain.Repositories;
-using Api.Service.Services;
 
 namespace Api.CrossCutting.DependencyInjection
 {
@@ -20,6 +18,9 @@ namespace Api.CrossCutting.DependencyInjection
             );
             serviceCollection.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
             serviceCollection.AddTransient<IUserRepository, UserImplementation>();
+            serviceCollection.AddTransient<IUfRepository, UfImplementation>();
+            serviceCollection.AddTransient<IMunicipioRepository, MunicipioImplementation>();
+            serviceCollection.AddTransient<ICepRepository, CepImplementation>();
         }
     }
 }
