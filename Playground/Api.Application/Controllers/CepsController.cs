@@ -1,43 +1,27 @@
-﻿using Api.Domain.Interfaces.Services.Municipio;
-using Microsoft.AspNetCore.Mvc;
-using System.Net;
-using System;
+﻿using Api.Domain.Interfaces.Services.Cep;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using System;
+using System.Net;
+using Api.Domain.Dtos.Cep;
 using Api.Domain.Dtos.Municipio;
 
 namespace Api.Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MunicipiosController : ControllerBase
+    public class CepsController : ControllerBase
     {
-        private readonly IMunicipioService _service;
+        private readonly ICepService _service;
 
-        public MunicipiosController(IMunicipioService service)
+        public CepsController(ICepService service)
         {
             _service = service;
         }
 
         [AllowAnonymous]
-        [HttpGet]
-        public async Task<ActionResult> GetAll()
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            try
-            {
-                return Ok(await _service.GetAll());
-            }
-            catch (Exception e)
-            {
-                return HandleError(e);
-            }
-        }
-
-        [AllowAnonymous]
-        [HttpGet("{id:guid}", Name = "GetMunicipioWithId")]
+        [HttpGet("{id:guid}", Name = "GetCepWithId")]
         public async Task<ActionResult> Get(Guid id)
         {
 
@@ -46,7 +30,10 @@ namespace Api.Application.Controllers
 
             try
             {
-                return Ok(await _service.Get(id));
+                var result = await _service.Get(id);
+                if (result == null)
+                    return NotFound();
+                return Ok(result);
             }
             catch (Exception e)
             {
@@ -55,8 +42,8 @@ namespace Api.Application.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("CompletedByIdMunicipio/{idMunicipio:guid}")]
-        public async Task<ActionResult> GetCompleteByIdMunicipio(Guid idMunicipio)
+        [HttpGet("byCep/{cep:alpha}")]
+        public async Task<ActionResult> GetByCep(string cep)
         {
 
             if (!ModelState.IsValid)
@@ -64,24 +51,10 @@ namespace Api.Application.Controllers
 
             try
             {
-                return Ok(await _service.GetCompleteById(idMunicipio));
-            }
-            catch (Exception e)
-            {
-                return HandleError(e);
-            }
-        }
-
-        [AllowAnonymous]
-        [HttpGet("CompletedByIdIbg/{idIbge:int}")]
-        public async Task<ActionResult> GetCompleteByIdIbge(int idIbge)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            try
-            {
-                return Ok(await _service.GetCompleteByIbge(idIbge));
+                var result = await _service.Get(cep);
+                if (result == null)
+                    return NotFound();
+                return Ok(result);
             }
             catch (Exception e)
             {
@@ -91,16 +64,16 @@ namespace Api.Application.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] MunicipioDtoCreate municipio)
+        public async Task<ActionResult> Post([FromBody] CepDtoCreate cep)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                var result = await _service.Post(municipio);
+                var result = await _service.Post(cep);
                 if (result != null)
-                    return Created(new Uri(Url.Link("GetMunicipioWithId", new { id = result.Id })), result);
+                    return Created(new Uri(Url.Link("GetCepWithId", new { id = result.Id })), result);
                 return BadRequest();
             }
             catch (Exception e)
@@ -111,16 +84,16 @@ namespace Api.Application.Controllers
 
         [AllowAnonymous]
         [HttpPut]
-        public async Task<ActionResult> Put([FromBody] MunicipioDtoUpdate municipio)
+        public async Task<ActionResult> Put([FromBody] CepDtoUpdate cep)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                var result = await _service.Put(municipio);
+                var result = await _service.Put(cep);
                 if (result != null)
-                    return Created(new Uri(Url.Link("GetMunicipioWithId", new { id = result.Id })), result);
+                    return Created(new Uri(Url.Link("GetCepWithId", new { id = result.Id })), result);
                 return BadRequest();
             }
             catch (Exception e)
