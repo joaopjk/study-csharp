@@ -49,7 +49,7 @@ namespace Api.Data.Repositories
                 _dbSet.Add(entity);
                 await _context.SaveChangesAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -68,7 +68,7 @@ namespace Api.Data.Repositories
             {
                 return await _dbSet.SingleOrDefaultAsync(e => e.Id == id);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -80,7 +80,7 @@ namespace Api.Data.Repositories
             {
                 return await _dbSet.ToListAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -100,7 +100,7 @@ namespace Api.Data.Repositories
                 _context.Entry(result).CurrentValues.SetValues(entity);
                 await _context.SaveChangesAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
