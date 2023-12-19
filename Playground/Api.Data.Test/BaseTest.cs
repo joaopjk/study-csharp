@@ -16,7 +16,7 @@ namespace Api.Data.Test
     public class DbTest : IDisposable
     {
         private readonly string _dataBaseName = $"dbApiTest_{Guid.NewGuid().ToString().Replace("-", string.Empty)}";
-        private readonly ServiceProvider _serviceProvider;
+        public ServiceProvider ServiceProvider { get; private set; }
 
         public DbTest()
         {
@@ -24,17 +24,18 @@ namespace Api.Data.Test
             serviceCollection.AddDbContext<MyContext>(o =>
             {
                 o.UseMySql($@"Server=localhost,3306;Database={_dataBaseName};Uid=root;Pwd=root@1234");
-                
+
             }, ServiceLifetime.Transient);
 
-            _serviceProvider = serviceCollection.BuildServiceProvider();
+            ServiceProvider = serviceCollection.BuildServiceProvider();
 
-            using var context = _serviceProvider.GetService<MyContext>(); 
+            using var context = ServiceProvider.GetService<MyContext>();
             context.Database.EnsureCreated();
         }
         public void Dispose()
         {
-            throw new NotImplementedException();
+            using var context = ServiceProvider.GetService<MyContext>();
+            context.Database.EnsureDeleted();
         }
     }
 }
