@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System;
 using System.Net;
 using Api.Domain.Dtos.Cep;
-using Api.Domain.Dtos.Municipio;
 
 namespace Api.Application.Controllers
 {
