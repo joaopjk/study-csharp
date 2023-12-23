@@ -12,16 +12,23 @@ namespace Api.Application.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        private readonly IUserService _service;
+
+        public UsersController(IUserService service)
+        {
+            _service = service;
+        }
+
         [Authorize("Bearer")]
         [HttpGet]
-        public async Task<ActionResult> GetAll([FromServices] IUserService service)
+        public async Task<ActionResult> GetAll()
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                return Ok(await service.GetAll());
+                return Ok(await _service.GetAll());
             }
             catch (Exception ex)
             {
@@ -32,14 +39,14 @@ namespace Api.Application.Controllers
         [Authorize("Bearer")]
         [HttpGet]
         [Route("{id:guid}", Name = "GetWithId")]
-        public async Task<ActionResult> Get([FromServices] IUserService service, Guid id)
+        public async Task<ActionResult> Get(Guid id)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                return Ok(await service.Get(id));
+                return Ok(await _service.Get(id));
             }
             catch (Exception ex)
             {
@@ -49,14 +56,14 @@ namespace Api.Application.Controllers
 
         [Authorize("Bearer")]
         [HttpPost]
-        public async Task<ActionResult> Post([FromServices] IUserService service, [FromBody] UserDtoCreate userDtoCreate)
+        public async Task<ActionResult> Post([FromBody] UserDtoCreate userDtoCreate)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                var result = await service.Post(userDtoCreate);
+                var result = await _service.Post(userDtoCreate);
                 if (result != null)
                     return Created(new Uri(Url.Link("GetWithId", new { id = result.Id })), result);
                 return BadRequest();
@@ -70,14 +77,14 @@ namespace Api.Application.Controllers
 
         [Authorize("Bearer")]
         [HttpPut]
-        public async Task<ActionResult> Put([FromServices] IUserService service, [FromBody] UserDtoUpdate userDtoUpdate)
+        public async Task<ActionResult> Put([FromBody] UserDtoUpdate userDtoUpdate)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                var result = await service.Put(userDtoUpdate);
+                var result = await _service.Put(userDtoUpdate);
                 if (result != null)
                     return Ok(result);
                 return BadRequest();
@@ -90,14 +97,14 @@ namespace Api.Application.Controllers
 
         [Authorize("Bearer")]
         [HttpDelete("{id:guid}")]
-        public async Task<ActionResult> Delete([FromServices] IUserService service, Guid id)
+        public async Task<ActionResult> Delete(Guid id)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                return Ok(await service.Delete(id));
+                return Ok(await _service.Delete(id));
             }
             catch (Exception ex)
             {
